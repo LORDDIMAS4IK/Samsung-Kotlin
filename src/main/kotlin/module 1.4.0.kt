@@ -5,20 +5,20 @@ enum class Direction {
 class Robot(var x: Int, var y: Int, var direction: Direction) {
 
     fun turnRight() {
-        when (direction) {
-            Direction.UP -> direction = Direction.RIGHT
-            Direction.RIGHT -> direction = Direction.DOWN
-            Direction.DOWN -> direction = Direction.LEFT
-            Direction.LEFT -> direction = Direction.UP
+        direction = when (direction) {
+            Direction.UP -> Direction.RIGHT
+            Direction.RIGHT -> Direction.DOWN
+            Direction.DOWN -> Direction.LEFT
+            Direction.LEFT -> Direction.UP
         }
     }
 
     fun turnLeft() {
-        when (direction) {
-            Direction.UP -> direction = Direction.LEFT
-            Direction.LEFT -> direction = Direction.DOWN
-            Direction.DOWN -> direction = Direction.RIGHT
-            Direction.RIGHT -> direction = Direction.UP
+        direction = when (direction) {
+            Direction.UP -> Direction.LEFT
+            Direction.LEFT -> Direction.DOWN
+            Direction.DOWN -> Direction.RIGHT
+            Direction.RIGHT -> Direction.UP
         }
     }
 
@@ -38,13 +38,62 @@ class Robot(var x: Int, var y: Int, var direction: Direction) {
 }
 
 fun moveRobot(r: Robot, toX: Int, toY: Int) {
-    //TODO Реализовать движение робота в точку через методы turnLeft(), turnRight(), stepForward()
-
+    // Реализовать движение робота в точку через методы turnLeft(), turnRight(), stepForward()
+    if (r.x < toX && toX >= 0) {
+        while (r.x != toX) {
+            r.x++
+        }
+    }
+    if (r.x > toX && toX >= 0) {
+        while (r.x != toX) {
+            r.x--
+        }
+    }
+    if ((r.x > toX) && (toX <= 0)) {
+        while (r.x != toX) {
+            r.x--
+        }
+    }
+    if ((r.x < toX) && (toX <= 0)) {
+        while (r.x != toX) {
+            r.x++
+        }
+    }
+    if (r.y < toY && toY >= 0) {
+        while (r.y != toY) {
+            r.y++
+        }
+    }
+    if (r.y > toY && toY >= 0) {
+        while (r.y != toY) {
+            r.y--
+        }
+    }
+    if ((r.y > toY) && (toY <= 0)) {
+        while (r.y != toY) {
+            r.y--
+        }
+    }
+    if ((r.y < toY) && (toY <= 0)) {
+        while (r.y != toY) {
+            r.y++
+        }
+    }
 }
 
+    fun main() {
 
-fun main() {
-    val r = Robot(0, 1, Direction.UP)
-    moveRobot(r, 3, 7)
-    println("${r.x} ${r.y}")
-}
+        val r = Robot(0,1,Direction.UP)
+        r.turnRight()
+        r.stepForward()
+        r.stepForward()
+        r.stepForward()
+        r.turnRight()
+        r.stepForward()
+        r.stepForward()
+        r.turnLeft()
+        println(r)
+
+        moveRobot(r, 3, 7)
+        println("${r.x} ${r.y}")
+    }
